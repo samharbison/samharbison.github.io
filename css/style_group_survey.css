@@ -27,6 +27,7 @@
 
 .form-group {
     margin: 10px;
+    text-transform: lowercase;
 }
 
 p {
@@ -40,5 +41,5 @@ p {
 img{
   width: 100%;
   vertical-align: bottom;
-  
+
 }
