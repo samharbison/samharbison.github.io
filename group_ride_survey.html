@@ -4,28 +4,26 @@
 <head>
   <meta charset="UTF-8">
   <title>MFS Group Ride Survey</title>
-
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-
-    <link rel="stylesheet" href="css/style_group_survey.css">
-
-
-</head>
-
-<body>
-
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="css/style_group_survey.css">
   <link href="https://fonts.googleapis.com/css?family=Poppins:800" rel="stylesheet">
 
 
 
-<!-- Latest compiled and minified CSS -->
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 
-<!-- jQuery library -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 
-<!-- Latest compiled JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+
+
 
 <header>
   <div class="wrapper">
@@ -46,16 +44,16 @@
       <label for="ride_name">What is the name of the ride?</label>
       <input type="text" class="form-control" name="entry.1190927608" id="ride_name" >
     </div>
-
+    <br>
     <div class="form-group">
       <label for="city">What city/town does the ride start in?</label>
       <input type="text" class="form-control" name="entry.881112121" id="city">
     </div>
-
+    <br>
     <div class="form-group">
       <label for="state">What state is this city in?</label>
       <br>
-      <select name="entry.1424549009" id="state">
+      <select name="entry.1424549009" id="state" class="form-control">
         <option value="AL">Alabama</option>
         <option value="AK">Alaska</option>
         <option value="AZ">Arizona</option>
@@ -109,16 +107,16 @@
         <option value="WY">Wyoming</option>
       </select>
     </div>
-
+    <br>
     <div class="form-group">
       <label for="start_spot">Tell us where the ride starts! Full addresses are appreciated but anything will do.</label>
       <input type="text" class="form-control" name="entry.1950722494" id="start_spot">
     </div>
-
+    <br>
     <div class="form-group">
       <label for="ride_type">What Type of ride is it?</label>
       <br>
-      <select name="entry.254027273" id="ride_type">
+      <select name="entry.254027273" id="ride_type" class="form-control">
         <option value="1">Road Ride (Race)</option>
         <option value="2">Road Ride (Chill, no-drop)</option>
         <option value="3">Weekly Race Series (Crit or Circuit)</option>
@@ -126,12 +124,12 @@
         <option value="5">Any Other Type of Ride</option>
       </select>
     </div>
-
+    <br>
     <div class="form-group">
       <label for="how_often">How often does the ride happen? (Once a week, Once a month, etc.)</label>
-      <input type="text" class="form-control" name="entry.1443992669" id="start_spot">
+      <input type="text" class="form-control" name="entry.1443992669" id="how_often">
     </div>
-
+    <br>
     <div class="form-group">
       <label for="day_of_week">What day of the week does the ride happen?</label>
       <select name="entry.983110248" id="day_of_week" class="form-control">
@@ -144,16 +142,15 @@
         <option>Sunday</option>
       </select>
     </div>
-
-
-    <div class="form-group">
+    <br>
+    <div class="form-group2">
       <label>Does the ride happen year round?</label>
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="entry.1052650748" id="year_round_yes" value="1">
+      <div class="form-check" id = "yesno">
+        <input class="form-check-input" type="radio" name="entry.1052650748" id="year_round_yes" value="1" >
         <label class="form-check-label" for="exampleRadios1">Yes</label>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="entry.1052650748" id="year_round_no" value="0">
+        <input class="form-check-input" type="radio" name="entry.1052650748" id="year_round_no" value="0" >
         <label class="form-check-label" for="exampleRadios2">No</label>
       </div>
     </div>
@@ -162,32 +159,32 @@
       <label for="start_date">Start Date</label>
       <input size="16" type="date" class="form-control" name="entry.861610574" id="start_date">
     </div>
-
+    <br>
     <div class="form-group">
       <label for="end_date">End Date</label>
       <input size="16" type="date" class="form-control" name="entry.1946255309" id="end_date">
     </div>
-
+    <br>
     <div class="form-group">
       <label for="length">On average, how long is the ride?</label>
       <input type="text" class="form-control" name="entry.1064180588" id="start_spot">
     </div>
-
+    <br>
     <div class="form-group">
       <label for="length">On average, how many people come to the ride?</label>
       <input type="text" class="form-control" name="entry.1736179169" id="start_spot">
     </div>
-
+    <br>
     <div class="form-group">
       <label for="why_neat">Tell us why the ride is Rad, Neat, Dope, etc.</label>
       <textarea class="form-control" rows="5" name="entry.1508016292" id="why_neat"></textarea>
     </div>
-
+    <br>
     <div class="form-group">
       <label for="length">Finally, can you give us a PUBLIC Strava URL to the ride? Routes, Activites, etc are welcomed!</label>
       <input type="url" class="form-control" name="entry.620891841" id="start_spot">
     </div>
-
+    <br>
     <button class="btn btn-secondary btn-lg btn-block" type="submit" value="Submit">Submit your Survey</button>
 
   <div class="image">

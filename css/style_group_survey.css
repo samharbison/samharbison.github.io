@@ -21,17 +21,42 @@
   margin-bottom: 10px;
 }
 
+.form-group input {
+  width: 500px;
+}
+
+.form-group textarea {
+  width: 500px;
+}
+
+.form-group select {
+  width: 500px;
+}
+
 .form-group label {
     font-family: "Poppins", sans-serif;
+    font-size: 12pt;
+    width: 500px;
 }
 
 .form-group {
-    margin: 10px;
-    text-transform: lowercase;
+    margin: 15px;
 }
+
+.form-group2 label {
+    font-family: "Poppins", sans-serif;
+    font-size: 12pt;
+}
+
+
+.form-group2 {
+    margin-left: 15px;
+}
+
 
 p {
   font-family: 'Poppins', sans-serif;
+  font-size: 12pt;
 }
 
 .button{
