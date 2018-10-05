@@ -13,6 +13,9 @@
    integrity="sha512-nMMmRyTVoLYqjP9hrbed9S+FzjZHW5gY1TWCHA5ckwXZBadntCNs8kEqAWdrb9O7rxbCaA4lKTIWjDXZxflOcA=="
    crossorigin=""></script>
 
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+
 </head>
 
 <body>
@@ -20,8 +23,25 @@
 
   <script>
     // Create variable to hold map element, give initial settings to map
-    var map = L.map('map',{ center: [42.362432, -71.086086], zoom: 14});
+    var map = L.map('map',{ center: [45.5122, -122.6587], zoom:10});
     L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', { attribution: '© OpenStreetMap' }).addTo(map);
+
+    // loading GeoJSON file - Here my html and usa_adm.geojson file resides in same folder
+    $.getJSON("myfile.geojson",function(data){
+      // L.geoJson function is used to parse geojson file and load on to map
+      L.geoJson(data, {
+        onEachFeature: function(feature, layer){
+          var popupcontent = [];
+          for (var prop in feature.properties){
+            popupcontent.push(prop + ": " + feature.properties[prop]);
+          }
+          layer.bindPopup(popupcontent.join("<br />"));
+        }
+      }).addTo(map);
+    });
+
+
+
 
 </script>
 </body>
