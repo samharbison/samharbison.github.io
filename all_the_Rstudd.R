@@ -6,13 +6,13 @@ library(bitops)
 library(tidyverse)
 library(geojson)
 
-token_strava = "94e2f8a9d2e9ed6e8a738f35f6ac536fc70606b9"
+token_strava = 
 url = "https://www.strava.com/api/v3/routes/"
 route_id = c("13689670", "11842759","12680474","14727019")
 uri = paste(url,route_id,"?access_token=",token_strava, sep = "")
 app_name="groupridedb_sandbox"
 app_client_id="28823"
-google_key ="AIzaSyD7gfkVIcvJ4NOYD2-VwUrz8mK5qdy2gi4"
+google_key =
 
 d = list()
 for (i in 1:length(route_id)){
