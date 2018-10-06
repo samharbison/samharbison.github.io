@@ -5,14 +5,16 @@ library(httr)
 library(bitops)
 library(tidyverse)
 library(geojson)
+library(geojsonio)
+library(sp)
 
 token_strava = 
+google_key =
 url = "https://www.strava.com/api/v3/routes/"
 route_id = c("13689670", "11842759","12680474","14727019")
 uri = paste(url,route_id,"?access_token=",token_strava, sep = "")
 app_name="groupridedb_sandbox"
 app_client_id="28823"
-google_key =
 
 d = list()
 for (i in 1:length(route_id)){
@@ -89,35 +91,38 @@ y =lapply(d, function(x) {
 # latlong=separate(y, latlon, c('lat','lon'), sep = ',', convert = TRUE)
 # longlat = latlong[,c(2,1)]
 
-labs = list(poly = latlong,
-            label=paste0('<strong>title: </strong>',
-                         "peepoop",
-                         '<br><strong>distance:</strong>: ',
-                         111))
+# labs = list(poly = latlong,
+#             label=paste0('<strong>title: </strong>',
+#                          "peepoop",
+#                          '<br><strong>distance:</strong>: ',
+#                          111))
 
 
 # making geojson file -----------------------------------------------------
 
 #geojsonio::geojson_write(SpatialPolygons(list(Polygons(list(Polygon(latlong)), "1"))), file = "Desktop/myfile.geojson")
 #needs to be longitude latitude
-gl = SpatialLines(list(Lines(list(Line(longlat)), "a")))
-ggll = as.geojson(gl)
-ggll = properties_add(ggll, .list=list(`Ride Name` = "Big Dicks Wild Ride", `Elevation Gain` = "A million fucking feet"))
-geojsonio::geojson_write(ggll, file="samharbison.github.io/myfile.geojson")
-properties_add(as.geojson(SpatialLines(list(Line(x[[3]])))), .list=list(`Ride Name` = x$name, `Distance` = x$distance ))
+# gl = SpatialLines(list(Lines(list(Line(longlat)), "a")))
+# ggll = as.geojson(gl)
+# ggll = properties_add(ggll, .list=list(`Ride Name` = "Big Dicks Wild Ride", `Elevation Gain` = "A million fucking feet"))
+# geojsonio::geojson_write(ggll, file="samharbison.github.io/myfile.geojson")
+# properties_add(as.geojson(SpatialLines(list(Line(x[[3]])))), .list=list(`Ride Name` = x$name, `Distance` = x$distance ))
 
 g=lapply(y, function(x){
-    Line(x$coord)
+    l=Line(x$coord)
+    ll=Lines(list(l), sample(1:10000,1))
+    lll=(properties_add(geojson_json(SpatialLines(list(ll))), .list=list(`Ride Name` = x$name, `Distance` = x$distance )))
   })
-gl = SpatialLines(list(Lines(g,"a")))
+geo_write(as.geojson(Reduce("+",g)), "samharbison.github.io/myfile.geojson")
+# gl = SpatialLines(list(Lines(g,"a")))
 # making the map ----------------------------------------------------------
 
-map=leaflet(data = labs)  %>%
-  addTiles() %>%
-  addPolylines(lng = ~poly$lon,
-               lat = ~poly$lat,
-               label = ~HTML(label))
-
+# map=leaflet(data = labs)  %>%
+#   addTiles() %>%
+#   addPolylines(lng = ~poly$lon,
+#                lat = ~poly$lat,
+#                label = ~HTML(label))
+# 
 
 
 
