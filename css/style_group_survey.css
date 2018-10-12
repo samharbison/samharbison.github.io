@@ -5,58 +5,76 @@
   /*background: linear-gradient(-270deg, #ff3975 19%, #ffc229 83%);*/
   background: transparent;
   margin-bottom: 50px;
+  text-align: center;
+
 }
 
 .wrapper h1 {
-  text-align: center;
   font-size: 48px;
   font-family: 'Poppins', sans-serif;
   margin-bottom: 10px;
 }
 
 .wrapper h2 {
-  text-align: center;
   font-size: 15px;
   font-family: "Poppins", sans-serif;
   margin-bottom: 10px;
 }
 
 .form-group input {
-  width: 500px;
+  width: 600px;
+  margin: 0 auto;
+
 }
 
 .form-group textarea {
-  width: 500px;
+  width: 600px;
+  margin: 0 auto;
 }
 
 .form-group select {
-  width: 500px;
+  width: 600px;
+  margin: 0 auto;
 }
 
 .form-group label {
     font-family: "Poppins", sans-serif;
     font-size: 12pt;
-    width: 500px;
+    width: 600px;
+    display: block;
 }
 
 .form-group {
-    margin: 15px;
-}
+    margin: 0 auto;
+  }
 
-.form-group2 label {
+.yn_label {
     font-family: "Poppins", sans-serif;
     font-size: 12pt;
+    margin: 0 auto;
+    width: 600px;
+    display: block;
+  }
+
+.form-check {
+  width: 600px;
+  margin: 0 auto;
 }
 
 
 .form-group2 {
-    margin-left: 15px;
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif;
+  font-size: 12pt;
+  margin-bottom: 15px;
+
 }
 
 
 p {
   font-family: 'Poppins', sans-serif;
   font-size: 12pt;
+  width: 600px;
 }
 
 .button{
@@ -66,5 +84,9 @@ p {
 img{
   width: 100%;
   vertical-align: bottom;
+}
 
+label {
+  margin: 0 auto;
+  display: block;
 }
