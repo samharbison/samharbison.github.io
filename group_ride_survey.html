@@ -18,6 +18,8 @@
 
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!--Google maps places api -->
+
 </head>
 
 <body>
@@ -36,7 +38,9 @@
 <section>
   <p class="form-group">Hey y'all, How is it going? Good? Great, stoked for you. Now let me tell you, I really want to know about your local Group Ride. Tell me about it. PLEASE!!!!</p>
   <!---This is how we get the form to re-direct to a different html site--->
-  <script type="text/javascript">var submitted=false;</script>
+  <script type="text/javascript">
+    var submitted=false;
+  </script>
   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {window.location='https://media.giphy.com/media/9uoYC7cjcU6w8/giphy.gif';}"></iframe>
   <!--- This is form container--->
   <form action="https://docs.google.com/forms/d/e/1FAIpQLSdf0ekLKIXDXQFh5C8npQz2I4Hie8bwcCGYoCalewAYdL1skQ/formResponse"  method="POST" id="ss-form" target="hidden_iframe" onsubmit="submitted=true;">
@@ -110,7 +114,7 @@
     <br>
     <div class="form-group">
       <label for="start_spot">Tell us where the ride starts! Full addresses are appreciated but anything will do.</label>
-      <input type="text" class="form-control" name="entry.1950722494" id="start_spot">
+      <input type="text" class="form-control" name="entry.1950722494" id="start_spot" onFocus="geolocate();">
     </div>
     <br>
     <div class="form-group">
@@ -154,15 +158,41 @@
         <label class="form-check-label" for="exampleRadios2">No</label>
       </div>
     </div>
-    <p class="form-group">If the ride does not happen year round, can you provide us with relative Start and End Dates?</p>
+    <p class="form-group">If the ride does not happen year round, can you provide us with Start and End Months?</p>
     <div class="form-group">
-      <label for="start_date">Start Date</label>
-      <input size="16" type="date" class="form-control" name="entry.861610574" id="start_date">
+      <label for="start_month">Start Month</label>
+      <select class="form-control" name="entry.861610574" id="start_month">
+        <option>January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+      </select>
     </div>
     <br>
     <div class="form-group">
-      <label for="end_date">End Date</label>
-      <input size="16" type="date" class="form-control" name="entry.1946255309" id="end_date">
+      <label for="end_month">End Month</label>
+      <select class="form-control" name="entry.516392596" id="end_month">
+        <option>January</option>
+        <option>February</option>
+        <option>March</option>
+        <option>April</option>
+        <option>May</option>
+        <option>June</option>
+        <option>July</option>
+        <option>August</option>
+        <option>September</option>
+        <option>October</option>
+        <option>November</option>
+        <option>December</option>
+      </select>
     </div>
     <br>
     <div class="form-group">
@@ -191,11 +221,11 @@
     <image src="https://3dqtv3gwm6l3q4n9e3cldz0w-wpengine.netdna-ssl.com/wp-content/uploads/2018/05/manualforspeed_aack_cat3.gif"
   </div>
 
+
   </form>
 </section>
 
 
-<!---  <div><iframe name="no-target" id="no-target" style="display:none;" onload="if(typeof sent_hwamwgje!='undefined'){window.location='https://media.giphy.com/media/9uoYC7cjcU6w8/giphy.gif';}"></iframe></div>--->
 
 </body>
 </html>
