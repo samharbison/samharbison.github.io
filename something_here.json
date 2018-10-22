@@ -1,0 +1,26 @@
+{
+  "meta": {
+    "title": "something here",
+    "description": "more stuff"
+  },
+  "questions": [
+    {
+      "InputType": "input",
+      "InputLabel": "a thing",
+      "Choices": {}
+    },
+    {
+      "InputType": "input",
+      "InputLabel": "another thing",
+      "Choices": {}
+    },
+    {
+      "InputType": "select",
+      "InputLabel": "hit it right",
+      "Choices": [
+        "def",
+        "dont"
+      ]
+    }
+  ]
+}
