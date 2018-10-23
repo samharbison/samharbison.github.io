@@ -64,7 +64,7 @@ server <- shinyServer(function(input, output, session) {
       fv <- paste0('InputLabel',i)
       vn <- paste0('InputType',i)
       vo <- paste0('OutLabel',i)
-      list("div_type" = input[[vn]],"label" = input[[vo]], "q3" = input[[fv]] )
+      list("div_type" = input[[vn]],"label" = input[[fv]], "q3" = input[[vo]] )
     })
     toJSON(list("title" = input$title, "description" = input$desc, "questions" = out), pretty = T, auto_unbox = T)
   })
@@ -114,10 +114,6 @@ server <- shinyServer(function(input, output, session) {
     output$uiOutpt <- renderUI({
       # Create rows
       rows <- lapply(features$renderd,function(i){
-        num = 
-        observeEvent(is.null(noquote(paste("input",paste0("numChoice",i), sep = "$"))) ==FALSE ,{
-          num = paste("input",paste0("numChoice",i), sep = "$")
-        })
         fluidPage(
           fluidRow(h3(paste0("Question",i)),
           # duplicate choices make selectize poop the bed, use unique():
@@ -134,14 +130,7 @@ server <- shinyServer(function(input, output, session) {
         fluidRow(
           column(12,
                  conditionalPanel(condition = paste(paste("input",paste0('InputType',i), sep = "."), "'select'", sep = "=="),
-                                  fluidRow(
-                                    column(4,numericInput(paste0("numChoice",i), "How many Choices?", value = 2)),
-                                    conditionalPanel(paste(paste('input', paste0("numChoice",i), sep = "."), "null",sep = "!=" ),
-                                      lapply(1:num, function(j) {
-                                        textInput(paste0("choice",j), paste0("Choice", j, sep = " "))
-                                      })
-                                    )
-                                    )
+                                  textAreaInput(paste0("choices",i), "Enter Choices in order separated by a COMMA", width = "600px")
                                   
                                   
                                   

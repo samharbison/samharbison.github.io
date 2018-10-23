@@ -75,6 +75,7 @@ inputsServer <- function(input, output, session) {
 
 library(shiny)
 library(jsonlite)
+library(tidyverse)
 
 
 
@@ -144,10 +145,15 @@ server <- function(input, output, session) {
   })
   
   output$done <- downloadHandler(
-  
-    filename = paste(paste(strsplit(meta$stuff$meta$title, " " )[[1]], collapse ="_"), ".json", sep = ""),
+    filename = function() {paste(
+      paste(
+        strsplit(meta$stuff$meta$title,
+                  " " )[[1]],
+        collapse ="_"),
+      ".json",
+      sep = "")},
     content = function(file) {
-    write(toJSON(meta$stuff, pretty = TRUE, auto_unbox = TRUE), file)
+      write(toJSON(meta$stuff, pretty = TRUE, auto_unbox = TRUE), file)
   }
   )
 }
@@ -159,15 +165,16 @@ shinyApp(ui, server)
 # tring to parse together everything into HTML ----------------------------
 
 
-x = read_json("Downloads/something_here.json")
+x = read_json("samharbison.github.io/something_here.json")
 
 x$meta
-
+html_parser = function(x) {
 
 # Header Stuff (links to external libraries, css files, google fon --------
 
 head = paste(
-  '<head>
+  '<html lang="en">
+  <head>
   <meta charset="UTF-8">
   <title>',
   paste('MFS R2R:', x$meta$title, sep = " "),
@@ -184,7 +191,7 @@ head = paste(
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>'
-  )
+  , sep = "")
 
 
 # Title and description ---------------------------------------------------
@@ -203,62 +210,82 @@ description = paste(
 
 # how to make inputs ------------------------------------------------------
 
-
-input_ex = paste(
-  '<div class="form-group">
-    <label for="',
+stuff = lapply(1:length(x$questions), function(i) {
+  if (x$questions[[i]]$InputType=='input') {
     paste(
+      '<div class="form-group">
+      <label for="',
       paste(
-        strsplit(x$meta$title, " ")[[1]],
-        collapse = "_"),
-      'question',
-      i,
-      sep = "_"),
-    '">',
-    x$questions[[i]]$InputLabel,
-    '</label>
-    <input type="text" class="form-control" name="" id=',
-    paste(paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"), 'question', i, sep = "_"),
-    '>
-  </div>
-  <br>',
-    sep = ""
-  )
-cat(input_ex)
-
-
-
-
-# How to make dropdowns ---------------------------------------------------
-
-
-i=3
-options =lapply(1:length(x$questions[[3]]$Choices), function(j) {
-  paste(
-    '<option value="',j,'">',x$questions[[3]]$Choices[[j]][1],
-    '</option>',
-    sep = ""
-  )
+        paste(
+          strsplit(x$meta$title, " ")[[1]],
+          collapse = "_"),
+        'question',
+        i,
+        sep = "_"),
+      '">',
+      x$questions[[i]]$InputLabel,
+      '</label>
+      <input type="text" class="form-control" name="" id=',
+      paste(paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"), 'question', i, sep = "_"),
+      '>
+      </div>
+      <br>',
+      sep = ""
+    )
+  } else if (x$questions[[i]]$InputType=='select') {
+    options =lapply(1:length(x$questions[[i]]$Choices), function(j) {
+      paste(
+        '<option value="',j,'">',x$questions[[i]]$Choices[[j]][1],
+        '</option>',
+        sep = ""
+      )
+    })
+    
+    paste(
+      '<div class="form-group">
+      <label for="',
+      paste(paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"), 'question', i, sep = "_"),
+      '">',
+      x$questions[[i]]$InputLabel,
+      '</label>
+      <br>
+      <select class="form-control" name="" id="',
+      paste(paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"), 'question', i, sep = "_"),
+      '">
+      <option style="display:none;"></option>\n',
+      paste(do.call("c", options), collapse = "\n"),
+      '\n</select>
+      </div>
+      <br>',
+      sep=""
+    )
+  }
 })
 
-choice_ex = paste(
-'<div class="form-group"
-<label for="',
-paste(paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"), 'question', i, sep = "_"),
-'">',
-x$questions[[i]]$InputLabel,
-'</label>
-<br>
-<select class="form-control" name="" id="',
-paste(paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"), 'question', i, sep = "_"),
-'">
-<option style="display:none;"></option>\n',
-paste(do.call("c", options), collapse = "\n"),
-'\n</select>
-</div>
-<br>',
-sep=""
-)
+  cat(
+  paste(
+    head,
+    '<body>',
+    title,
+    '<section>',
+    description,
+    '<form action=""  method="POST" id="ss-form" target="hidden_iframe" onsubmit="submitted=true;">',
+     paste(do.call("c", stuff), collapse="\n"),
+    '</form>
+    </section>
+    </body>
+    </html>',
+    sep = "\n"),
+  file = "samharbison.github.io/tester.html" )}
+  
+
+
+
+
+
+
+
+
 
 
 
