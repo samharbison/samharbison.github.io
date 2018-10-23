@@ -165,7 +165,7 @@ shinyApp(ui, server)
 # tring to parse together everything into HTML ----------------------------
 
 
-x = read_json("samharbison.github.io/something_here.json")
+x = jsonlite::read_json("~/samharbison.github.io/something_here.json")
 
 x$meta
 html_parser = function(x) {
@@ -192,6 +192,48 @@ head = paste(
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>'
   , sep = "")
+
+
+head_locate = paste(
+  '<html lang="en">
+  <head>
+  <meta charset="UTF-8">
+  <title>',
+  paste('MFS R2R:', x$meta$title, sep = " "),
+  '</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
+  <link rel="stylesheet" href="',
+  paste(paste('style',paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"), sep = "_"), "css", sep = '.'),
+  '">
+  <link href="https://fonts.googleapis.com/css?family=Poppins:800" rel="stylesheet">
+  <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+
+  var x = document.getElementById("latlong");
+
+  function getLocation() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+      x.value = "Geolocation is not supported by this browser.";
+    }
+  }
+
+  function showPosition(position) {
+    x.value = position.coords.latitude + "," + position.coords.longitude;
+  }
+  </script>
+  </head>'
+  , sep = "")
+
+
+
+
 
 
 # Title and description ---------------------------------------------------
@@ -262,22 +304,67 @@ stuff = lapply(1:length(x$questions), function(i) {
   }
 })
 
+
+geolocate_script = '
+<script>
+
+var x = document.getElementById("latlong");
+
+function getLocation() {
+if (navigator.geolocation) {
+navigator.geolocation.getCurrentPosition(showPosition);
+} else {
+x.value = "Geolocation is not supported by this browser.";
+}
+}
+
+function showPosition(position) {
+x.value = position.coords.latitude + "," + position.coords.longitude;
+
+}
+</script>'
+
+locate = TRUE
+if (locate == TRUE) {
   cat(
-  paste(
-    head,
-    '<body>',
-    title,
-    '<section>',
-    description,
-    '<form action=""  method="POST" id="ss-form" target="hidden_iframe" onsubmit="submitted=true;">',
-     paste(do.call("c", stuff), collapse="\n"),
-    '</form>
-    </section>
-    </body>
-    </html>',
-    sep = "\n"),
-  file = "samharbison.github.io/tester.html" )}
-  
+    paste(
+      head,
+      '<body onload="getLocation()">',
+      title,
+      '<section>',
+      description,
+      '<form action=""  method="POST" id="ss-form" target="hidden_iframe" onsubmit="submitted=true;">',
+      '<input name="" id="latlong">',
+      paste(do.call("c", stuff), collapse = "\n"),
+      '</form>',
+      geolocate_script,
+      '</section>
+      </body>
+      </html>',
+      sep = "\n"
+    ),
+    file = "~/samharbison.github.io/tester.html"
+  )
+} else {
+  cat(
+    paste(
+      head,
+      '<body>',
+      title,
+      '<section>',
+      description,
+      '<form action=""  method="POST" id="ss-form" target="hidden_iframe" onsubmit="submitted=true;">',
+      paste(do.call("c", stuff), collapse = "\n"),
+      '</form>
+      </section>
+      </body>
+      </html>',
+      sep = "\n"
+    ),
+    file = "~/samharbison.github.io/tester.html"
+  )
+}
+}  
 
 
 

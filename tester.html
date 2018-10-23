@@ -1,9 +1,9 @@
 <html lang="en">
   <head>
   <meta charset="UTF-8">
-  <title> MFS R2R: something here </title>
+  <title>MFS R2R: something here</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-  <link rel="stylesheet" href="style_group_survey.css">
+  <link rel="stylesheet" href="style_something_here.css">
   <link href="https://fonts.googleapis.com/css?family=Poppins:800" rel="stylesheet">
   <!-- Latest compiled and minified CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -12,7 +12,7 @@
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   </head>
-<body>
+<body onload="getLocation()">
 <header>
   <div class="wrapper">
   <h1> something here </h1>
@@ -21,6 +21,7 @@
 <section>
 <p class="form-group">more stuff<p>
 <form action=""  method="POST" id="ss-form" target="hidden_iframe" onsubmit="submitted=true;">
+<input name="" id="latlong">
 <div class="form-group">
       <label for="something_here_question_1">a thing</label>
       <input type="text" class="form-control" name="" id=something_here_question_1>
@@ -42,6 +43,24 @@
       </div>
       <br>
 </form>
-    </section>
-    </body>
-    </html>
+
+<script>
+
+var x = document.getElementById("latlong");
+
+function getLocation() {
+if (navigator.geolocation) {
+navigator.geolocation.getCurrentPosition(showPosition);
+} else {
+x.value = "Geolocation is not supported by this browser.";
+}
+}
+
+function showPosition(position) {
+x.value = position.coords.latitude + "," + position.coords.longitude;
+
+}
+</script>
+</section>
+      </body>
+      </html>
