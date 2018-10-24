@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 
 <head>
   <meta charset="UTF-8">
@@ -12,21 +12,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <!-- Latest compiled JavaScript -->
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-  <script>
-    var x = document.getElementById("latlong");
-
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-        x.value = "Geolocation is not supported by this browser.";
-      }
-    }
-
-    function showPosition(position) {
-      x.value = position.coords.latitude + "," + position.coords.longitude;
-    }
-  </script>
 </head>
 
 <body onload="getLocation()">
@@ -42,7 +27,7 @@
     </script>
     <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {window.location='https://media.giphy.com/media/9uoYC7cjcU6w8/giphy.gif';}"></iframe>
     <form action="https://docs.google.com/forms/d/e/1FAIpQLSc2WW01-yh5cOx2tzGEisIShU42-aIyzBYhwbPalY0pAdGvbg/formResponse" method="POST" id="ss-form" target="hidden_iframe" onsubmit="submitted=true;">
-      <input name="entry.1057813838" id="latlong">
+      <input type="hidden" name="entry.1057813838" id="latlong">
       <div class="form-group">
         <label for="something_here_question_1">a thing</label>
         <input type="text" class="form-control" name="entry.2109377780" id=something_here_question_1>
@@ -65,6 +50,21 @@
       <br>
       <button class="btn btn-secondary btn-lg btn-block" type="submit" value="Submit">Submit your Survey</button>
     </form>
+    <script>
+      var x = document.getElementById("latlong");
+
+      function getLocation() {
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+          x.value = "Geolocation is not supported by this browser.";
+        }
+      }
+
+      function showPosition(position) {
+        x.value = position.coords.latitude.toFixed(3) + "," + position.coords.longitude.toFixed(3);
+      }
+    </script>
   </section>
 </body>
 

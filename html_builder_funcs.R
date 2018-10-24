@@ -20,9 +20,8 @@ a=paste(strsplit(x$meta$title, " ")[[1]])
 
 x = jsonlite::read_json("~/samharbison.github.io/something_here.json")
 redirect_url = 'https://media.giphy.com/media/9uoYC7cjcU6w8/giphy.gif'
-google_form_url = "https://goo.gl/forms/NmLOwP8a1Hflmc7F2"
+google_form_url = "https://docs.google.com/forms/d/e/1FAIpQLSc2WW01-yh5cOx2tzGEisIShU42-aIyzBYhwbPalY0pAdGvbg/viewform"
 
-x$meta
 
 
 
@@ -77,22 +76,6 @@ head_html = function(x,
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
       <!-- Latest compiled JavaScript -->
       <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-      <script>
-      
-      var x = document.getElementById("latlong");
-      
-      function getLocation() {
-      if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-      x.value = "Geolocation is not supported by this browser.";
-      }
-      }
-      
-      function showPosition(position) {
-      x.value = position.coords.latitude + "," + position.coords.longitude;
-      }
-      </script>
       </head>'
       ,
       sep = ""
@@ -221,7 +204,7 @@ form_html = function(x, google_form_url, locate = TRUE)  {
                    '" method="POST" id="ss-form" target="hidden_iframe" onsubmit="submitted=true;">',
                    sep = "")
   form_tag_2 = '</form>'
-  hidden_location_input = paste('<input type = "hidden" name="',event_ids[1],'" id="latlong">', sep = "")
+  hidden_location_input = paste('<input type="hidden" name="',event_ids[1],'" id="latlong">', sep = "")
   inputs =input_html(x, event_ids)
   button = '<button class="btn btn-secondary btn-lg btn-block" type="submit" value="Submit">Submit your Survey</button>'
   divs = paste(
@@ -248,6 +231,22 @@ section_html = function(x, google_form_url, redirect_url, locate = TRUE) {
     survey_description_html(x),
     survey_redirect_html(redirect_url),
     form_html(x, google_form_url, locate),
+    '<script>
+      
+    var x = document.getElementById("latlong");
+    
+    function getLocation() {
+    if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+    x.value = "Geolocation is not supported by this browser.";
+    }
+    }
+    
+    function showPosition(position) {
+    x.value = position.coords.latitude.toFixed(3) + "," + position.coords.longitude.toFixed(3);
+    }
+    </script>',
     '</section>',
     sep = "\n"
   )
@@ -260,7 +259,7 @@ html_html = function(x, google_form_url, redirect_url, locate = TRUE, font_api =
   if (locate == TRUE) {
     file = paste(
       '<!DOCTYPE html>
-      <html lang="en" >',
+      <html>',
       head_html(x, locate, font_api),
       '<body onload="getLocation()">',
       header_html(x),
