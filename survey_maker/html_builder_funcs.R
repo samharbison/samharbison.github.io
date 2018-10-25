@@ -1,7 +1,12 @@
+
+
+# HTML BUILDER ------------------------------------------------------------
+# sting title helper functions --------------------------------------------
+
+
 title_= function(a){
   paste(a, collapse = "_")
 } 
-
 
 question_namer = function(a, i) {
   x=paste(
@@ -13,10 +18,7 @@ question_namer = function(a, i) {
   return(x)
 }
 
-a=paste(strsplit(x$meta$title, " ")[[1]])
-  
-  
-  
+
 
 x = jsonlite::read_json("~/samharbison.github.io/something_here.json")
 redirect_url = 'https://media.giphy.com/media/9uoYC7cjcU6w8/giphy.gif'
@@ -129,7 +131,6 @@ survey_redirect_html = function(redirect_url) {
 }
   
 
-
 # how to make inputs ------------------------------------------------------
   
 input_html = function(x, event_ids) {
@@ -190,8 +191,6 @@ input_html = function(x, event_ids) {
 library(rvest)
 
 
-
-
 form_html = function(x, google_form_url, locate = TRUE)  {
   require(rvest)
   url = read_html(google_form_url)
@@ -206,7 +205,7 @@ form_html = function(x, google_form_url, locate = TRUE)  {
   form_tag_2 = '</form>'
   hidden_location_input = paste('<input type="hidden" name="',event_ids[1],'" id="latlong">', sep = "")
   inputs =input_html(x, event_ids)
-  button = '<button class="btn btn-secondary btn-lg btn-block" type="submit" value="Submit">Submit your Survey</button>'
+  button = '<button class="btn btn-primary btn-lg btn-block" type="submit" value="Submit" style="width: 55%;">Submit your Survey</button>'
   divs = paste(
     paste(
       do.call("c", inputs),
@@ -248,6 +247,8 @@ section_html = function(x, google_form_url, redirect_url, locate = TRUE) {
     }
     </script>',
     '</section>',
+    '<footer>
+    </footer>',
     sep = "\n"
   )
 }
@@ -284,6 +285,157 @@ html_html = function(x, google_form_url, redirect_url, locate = TRUE, font_api =
   return(file)
 }
 
+html_file_name =paste(paste(
+  paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"), sep = "_"
+), "html", sep = '.')
 
 
-cat(html_html(x, google_form_url, redirect_url, TRUE), file = "~/samharbison.github.io/map/tester.html")
+
+# CSS BUILDER -------------------------------------------------------------
+wrapper_css = function(font="Poppins") {
+  wrapper = paste(
+    '.wrapper {
+        width: 100%;
+        margin: 0 auto;
+        /* background: linear-gradient(-270deg, #ff3975 19%, #ffc229 83%); */
+        /* background: transparent; */
+        padding-bottom: 10px;
+        text-align: center;
+        margin-bottom: 10px;
+        }'
+    )
+  
+  heading1 = paste(
+    '.wrapper h1 {
+      font-size: 48px;
+      font-family: "',
+      font,
+      '" , sans-serif;
+      padding-bottom: 10px;
+      }',
+    sep = ""
+  )
+  return(paste( wrapper, heading1, sep="\n\n"))
+}
+
+form_grp_css = function(font = "Poppins", width = "55%", font_size = "12pt"){
+  width_line = paste("width: ", width, ";",  sep = "")
+  font_fam = paste('font-family: "',font, '", sans-serif;', sep = "")
+  font_sizer = paste('font-size: ',font_size, ';', sep = "")
+  
+  general = paste(
+    '.form-group {
+      margin: 0 auto;
+    }'
+  )
+  
+  inputs = paste(
+    '.form-group input {',
+        width_line,
+        'margin: 0 auto;
+      }',
+    sep = "\n"
+  )
+  
+  selects = paste(
+    '.form-group select {',
+        width_line,
+        'margin: 0 auto;
+    }',
+    sep = "\n"
+  )
+  
+  labels = paste(
+    '.form-group label {',
+        font_fam,
+        font_sizer,
+        width_line,
+      'display: block;
+      }',
+    sep = "\n"
+  )
+  
+  return(paste(
+    general,
+    inputs,
+    selects,
+    labels,
+    sep = "\n\n"
+  ))
+}
+
+tags_css = function(font = "Poppins", width = "55%", font_size = "12pt", button_color = "#FF3973") {
+  width_line = paste("width: ", width, ";",  sep = "")
+  font_fam = paste('font-family: "',font, '", sans-serif;', sep = "")
+  font_sizer = paste('font-size: ',font_size, ';', sep = "")
+  button_colorer = paste("background-color: ", button_color, " !important;", sep = "")
+  
+  p = paste(
+    'p {',
+    font_fam,
+    font_sizer,
+    width_line,
+    "}",
+    sep = "\n"
+  )
+  
+  footer = paste(
+    'footer {
+      margin: 0 auto;
+      display: block;
+      margin-top: 2em;
+    }'
+  )
+  
+  labels = paste(
+    'label {
+      margin: 0 auto;
+      display: block;
+    }'
+  )
+  
+  btn_margs = paste(
+    '.btn {
+      margin: 0 auto;
+      margin-bottom: 100px;
+    }'
+  )
+  
+  btn_col = paste(
+    '.btn {',
+    button_colorer,
+    "}",
+    sep = "\n"
+  )
+  
+  return(paste(
+    p,
+    footer,
+    labels,
+    btn_margs,
+    btn_col,
+    sep = "\n\n"
+  ))
+}
+
+
+style_file_name = paste(paste(
+  'style', paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"), sep = "_"
+), "css", sep = '.')
+
+full_css = paste(
+  wrapper_css(),
+  form_grp_css(),
+  tags_css(),
+  sep = "\n\n"
+)
+
+
+
+new_folder = paste(paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"),"survey", sep = "_")
+dir_name = paste("~/samharbison.github.io/", new_folder, sep = "")
+dir.create(dir_name)
+
+cat(html_html(x, google_form_url, redirect_url, TRUE), file = paste(dir_name, html_file_name, sep = "/"))
+cat(full_css, file = paste(dir_name, style_file_name, sep = "/"))
+
