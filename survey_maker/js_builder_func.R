@@ -22,7 +22,10 @@ beginning_stuff = function(x){
 
 
 inputs_stuff = function(x) {
-  
+  latlong = paste(
+    "form.addTextItem()
+      .setTitle('latlong');"
+  )
   inputs = lapply(1:length(x$questions), function(i) {
     if (x$questions[[i]]$InputType == 'input') {
       paste(
@@ -39,7 +42,7 @@ inputs_stuff = function(x) {
     }
   })
   
-  return(paste(do.call("c",inputs), collapse = "\n"))
+  return(paste(latlong,paste(do.call("c",inputs), collapse = "\n"), sep = "\n"))
 }
 
 
