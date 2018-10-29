@@ -20,9 +20,10 @@ question_namer = function(a, i) {
 
 
 
-x = jsonlite::read_json("~/samharbison.github.io/something_here.json")
-redirect_url = 'https://media.giphy.com/media/9uoYC7cjcU6w8/giphy.gif'
-google_form_url = "https://docs.google.com/forms/d/e/1FAIpQLSc2WW01-yh5cOx2tzGEisIShU42-aIyzBYhwbPalY0pAdGvbg/viewform"
+# #x = drive_download("This_is_for_testing_the_app_script_stuff.json")
+# x = read_json("~/samharbison.github.io/This_is_for_testing_the_app_script_stuff.json")
+# redirect_url = 'https://media.giphy.com/media/9uoYC7cjcU6w8/giphy.gif'
+# google_form_url = "https://docs.google.com/forms/d/e/1FAIpQLSc2WW01-yh5cOx2tzGEisIShU42-aIyzBYhwbPalY0pAdGvbg/viewform"
 
 
 
@@ -124,7 +125,7 @@ survey_redirect_html = function(redirect_url) {
     var submitted=false;
   </script>
   <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;" onload="if(submitted) {window.location=',
-  paste("'",redirect_url,"'", sep = ""),
+  paste("'", redirect_url,"'", sep = ""),
   ';}"></iframe>',
   sep = "")
   return(redirect)
@@ -438,4 +439,8 @@ dir.create(dir_name)
 
 cat(html_html(x, google_form_url, redirect_url, TRUE), file = paste(dir_name, html_file_name, sep = "/"))
 cat(full_css, file = paste(dir_name, style_file_name, sep = "/"))
+
+
+
+
 

@@ -36,7 +36,7 @@ inputsServer <- function(input, output, session) {
   output$InputType <- renderUI({
     selectInput(
       inputId = ns("InputType"),
-      label = "Choose an input Type",
+      label = "Choose an input type",
       choices = list("Short Answer" = "input",
                      "Multiple Choice" = "select"),
       width = '100%'
@@ -46,7 +46,7 @@ inputsServer <- function(input, output, session) {
   output$InputLabel <- renderUI({
     textInput(
       inputId = ns("InputLabel"),
-      label = "This is where you put the question",
+      label = "Input Label (Question you want to ask)",
       width = '100%'
     )
   })
@@ -56,14 +56,6 @@ inputsServer <- function(input, output, session) {
   })
   outputOptions(output, 'show', suspendWhenHidden = FALSE)
   
-  
-  output$numChoices <- renderUI({
-    numericInput(
-      inputId = ns("numChoices"),
-      label = "How many Choices?",
-      value = 2
-    )
-  })
   
   output$Choices <- renderUI({
     textAreaInput(
