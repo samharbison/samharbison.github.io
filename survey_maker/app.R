@@ -2,6 +2,8 @@ library(shiny)
 library(jsonlite)
 library(tidyverse)
 library(googledrive)
+library(shinyWidgets)
+library(shinycssloaders)
 
 
 source("inputsModule.R")
@@ -12,6 +14,7 @@ source("html_builder_funcs.R")
 
 
 ui <- navbarPage("MFS Survey Series Maker thing application",
+                 theme = "bootstrap.css",
   tabPanel("Build the Survey",
            sidebarLayout(
     sidebarPanel(
@@ -89,6 +92,8 @@ server <- function(input, output, session) {
   observeEvent(input$create, {
     meta$stuff$meta = list("title" = input$title,
                            "description" = input$desc)
+    sendSweetAlert(session, "Survey File Created", "Continue with addint the questions", type = "success")
+
   })
   
   observeEvent(input$add, {
@@ -126,6 +131,7 @@ server <- function(input, output, session) {
   # }
   # )
   observeEvent(input$save, {
+    withProgress(message= "Loading...", {
     folder_name = paste(strsplit(meta$stuff$meta$title," " )[[1]],collapse ="_")
     drive_mkdir(folder_name, parent = "Surveys")
     filename = paste(folder_name,".json",sep = "")
@@ -135,18 +141,18 @@ server <- function(input, output, session) {
     pa = drive_get(folder_name)
     drive_upload(filePath, path = pa$path)
     #drive_upload(filePath, path = pa$path, type ="application/vnd.google-apps.script")
-    
+    })
     output$js <- renderText({print(script_builder(meta$stuff))})
     showModal(modalDialog(
-      title = "Next Steps for creating Forms \n",
-      'Here is where things get a bit tricky, but use the following steps to get this right.
-      \n',
-      a(href = "https://script.google.com/d/1WNG46Igda2XUySvVdA9z7Gg300T48Rq4_dC0IKRn-RsrJ3xMWGXSQ5Ek/edit", "Go to this link", target = "_blank"),"\n",
-      "Go to File > New > Script File and Give it a name. Paste in the following code, save the file and click the play button",
+      title = p("Next Steps for creating Forms"),
+      p('Here is where things get a bit tricky, but use the following steps to get this right.
+      \n'),
+      p(a(href = "https://script.google.com/d/1WNG46Igda2XUySvVdA9z7Gg300T48Rq4_dC0IKRn-RsrJ3xMWGXSQ5Ek/edit", "Go to this link", target = "_blank")),
+      p("Go to File > New > Script File and Give it a name. Paste in the following code, save the file and click the play button"),
       verbatimTextOutput("js"),
-      "\n Once you have done the above, click the Button below to make all the stuff, but first provide a URL to redirect to.",
+      "\n Once you have done the above, click the button below to make all the stuff, but first provide a URL to redirect to.",
       textInput("redirect","Choose a redirect url",value = 'https://media.giphy.com/media/9uoYC7cjcU6w8/giphy.gif'),
-      actionButton("makeStuff","Make the stuff"),
+      actionButton("makeStuff","Make"),
       easyClose = FALSE
     ))
   })
@@ -158,10 +164,10 @@ server <- function(input, output, session) {
     redirect_url = input$redirect
     html_out = html_html(meta$stuff, google_form_url, redirect_url, TRUE)
     css_out = full_css(wrapper_css(), form_grp_css(), tags_css())
-    output$html<-renderText({print(html_out)})
-    output$css<-renderText({
-      print(css_out)
-    })
+    # output$html<-renderText({print(html_out)})
+    # output$css<-renderText({
+    #   print(css_out)
+    # })
     filename_html = paste(folder_name,".html",sep = "")
     filename_css = paste(paste(
       'style', paste(strsplit(meta$stuff$meta$title, " ")[[1]], collapse = "_"), sep = "_"
@@ -174,7 +180,8 @@ server <- function(input, output, session) {
     pa = drive_get(paste("~/Surveys/",folder_name,"/", sep = ""))
     drive_upload(filePath_html, path = pa$path[1])
     drive_upload(filePath_css, path = pa$path[1])
-    showModal(modalDialog(a(href=pa$drive_resource[[1]]$webViewLink, "Here is a link to the folder"), easyClose = T))
+    showModal(modalDialog(title = "The Stuff has been made!",
+                          a(href=pa$drive_resource[[1]]$webViewLink, "Here is a link to the folder in the google Drive"), easyClose = T))
   })
   
   

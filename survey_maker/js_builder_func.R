@@ -3,6 +3,16 @@ title_= function(a){
   paste(a, collapse = "_")
 } 
 
+question_namer = function(a, i) {
+  x=paste(
+    title_(a),
+    'question',
+    i,
+    sep="_"
+  )
+  return(x)
+}
+
 choice_formatter = function(choices) {
   choices = paste("[",
                   paste(paste0("'",
@@ -32,11 +42,11 @@ inputs_stuff = function(x) {
     if (x$questions[[i]]$InputType == 'input') {
       paste(
         "form.addTextItem()
-        .setTitle('", x$questions[[i]]$InputLabel,"');", sep = "")
+        .setTitle('", question_namer(strsplit(x$meta$title, " ")[[1]], i),"');", sep = "")
     } else if (x$questions[[i]]$InputType == 'select') {
       paste(
         "form.addListItem()
-        .setTitle('", x$questions[[i]]$InputLabel,"')
+        .setTitle('", question_namer(strsplit(x$meta$title, " ")[[1]], i),"')
         .setChoiceValues(", choice_formatter(1:length(x$questions[[i]]$Choices)),
         ");",
         sep = ""
