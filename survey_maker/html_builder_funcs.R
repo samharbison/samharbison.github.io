@@ -20,8 +20,8 @@ question_namer = function(a, i) {
 
 
 
-# #x = drive_download("This_is_for_testing_the_app_script_stuff.json")
-# x = read_json("~/samharbison.github.io/This_is_for_testing_the_app_script_stuff.json")
+# x = drive_download("This_is_the_title_of_the_survey.json")
+ #x = read_json(drive_download("Surveys/testing_some_js_stuff/testing_some_js_stuff.json", "application/json"))
 # redirect_url = 'https://media.giphy.com/media/9uoYC7cjcU6w8/giphy.gif'
 # google_form_url = "https://docs.google.com/forms/d/e/1FAIpQLSc2WW01-yh5cOx2tzGEisIShU42-aIyzBYhwbPalY0pAdGvbg/viewform"
 
@@ -286,9 +286,9 @@ html_html = function(x, google_form_url, redirect_url, locate = TRUE, font_api =
   return(file)
 }
 
-html_file_name =paste(paste(
-  paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"), sep = "_"
-), "html", sep = '.')
+# html_file_name =paste(paste(
+#   paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"), sep = "_"
+# ), "html", sep = '.')
 
 
 
@@ -420,25 +420,27 @@ tags_css = function(font = "Poppins", width = "55%", font_size = "12pt", button_
 }
 
 
-style_file_name = paste(paste(
-  'style', paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"), sep = "_"
-), "css", sep = '.')
+# style_file_name = paste(paste(
+#   'style', paste(strsplit($title, " ")[[1]], collapse = "_"), sep = "_"
+# ), "css", sep = '.')
 
-full_css = paste(
-  wrapper_css(),
-  form_grp_css(),
-  tags_css(),
-  sep = "\n\n"
-)
+full_css =function(wrapper_css, form_grp_css, tags_css) {
+  return(paste(
+    wrapper_css,
+    form_grp_css,
+    tags_css,
+    sep = "\n\n"
+  ))
+} 
 
 
 
-new_folder = paste(paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"),"survey", sep = "_")
-dir_name = paste("~/samharbison.github.io/", new_folder, sep = "")
-dir.create(dir_name)
+#new_folder = paste(paste(strsplit(x$meta$title, " ")[[1]], collapse = "_"),"survey", sep = "_")
+#dir_name = paste("~/samharbison.github.io/", new_folder, sep = "")
+#dir.create(dir_name)
 
-cat(html_html(x, google_form_url, redirect_url, TRUE), file = paste(dir_name, html_file_name, sep = "/"))
-cat(full_css, file = paste(dir_name, style_file_name, sep = "/"))
+#cat(html_html(x, google_form_url, redirect_url, TRUE), file = paste(dir_name, html_file_name, sep = "/"))
+#cat(full_css, file = paste(dir_name, style_file_name, sep = "/"))
 
 
 

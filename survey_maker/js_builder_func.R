@@ -1,5 +1,7 @@
 # JS form script Builder ---------------------------------------------------
-
+title_= function(a){
+  paste(a, collapse = "_")
+} 
 
 choice_formatter = function(choices) {
   choices = paste("[",
@@ -68,8 +70,8 @@ script_builder = function(x) {
   function_name = paste(title_(strsplit(x$meta$title," ")[[1]]), "function()", sep = "_")
   
   script = paste(
-    saveToFolder_function(),
-    "\n",
+    # saveToFolder_function(),
+    # "\n",
     "function ", function_name, " { \n",
     beg,
     "\n",
@@ -86,6 +88,14 @@ script_builder = function(x) {
     "}",
     sep = ""
   )
+  # files=list(list(
+  #   name = "Code",
+  #   type = "server_js",
+  #   source = script
+  # ), 
+  # list(name = "index",
+  #      type = "html",
+  #      source = ""))
   return(script)
 }
 

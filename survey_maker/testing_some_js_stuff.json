@@ -1,0 +1,13 @@
+{
+  "meta": {
+    "title": "testing some js stuff",
+    "description": "nothing to see here"
+  },
+  "questions": [
+    {
+      "InputType": "input",
+      "InputLabel": "fuck you my guy",
+      "Choices": {}
+    }
+  ]
+}
