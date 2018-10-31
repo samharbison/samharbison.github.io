@@ -13,14 +13,14 @@
 
 .question {
     position: absolute;
-    left: 40%;
-    top: 80%;
+    left: 70%;
+    top: 50%;
     margin: 10px;
-    padding: 5px 5px;
+    padding: 50px 50px;
     font-size: 20px;
     font-family: Helvetica;
     color: #FFF;
-    background-color: rgba(50, 50, 50, 0.3);
+    background-color: transparent;
 }
 
 video {
