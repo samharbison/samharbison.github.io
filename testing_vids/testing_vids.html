@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
   <!-- <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3pro.css"> -->
   <link rel="stylesheet" href="testing_vids.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
@@ -21,7 +21,7 @@
 </head>
 <div class = "out-cont">
   <div class = "in-cont">
-    <div class = "question">
+    <div class = "question" id="question_id">
       <label for="ride_type">What Type of ride is it?</label>
       <br>
       <select name="entry.254027273" id="ride_type" class="form-control">
@@ -38,4 +38,7 @@
     </video>
     </div>
   </div>
+  <script>
+    $('#question_id').delay(10000).fadeIn('slow').delay(10000).fadeOut('slow');
+  </script>
 </html>
