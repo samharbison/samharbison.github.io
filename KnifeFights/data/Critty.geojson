@@ -1,0 +1,115 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "id": 1,
+      "properties": {
+        "RideName": "szdfjlkgjsad,./gm",
+        "Distance": "asjdhf,mnv.sdfg",
+        "RideType": "Critty",
+        "StartSpot": "Fairlawn, Fairlawn, OH, USA",
+        "DroporNo": "Drop",
+        "Dates": "2019-06-25 - 2019-06-25",
+        "DaysofWeek": "Wednesday, Thursday, Friday, Saturday, Sunday",
+        "StartTime": {},
+        "Field ize": {},
+        "Organizer": {},
+        "ContactInfo": {},
+        "Info": {}
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-81.6098, 41.1278]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1,
+      "properties": {
+        "RideName": "knifing it up",
+        "Distance": "32o5ip2834aef",
+        "RideType": "Critty",
+        "StartSpot": "Breadwinner Cycles, 2323 N Williams Ave, Portland, OR 97227, USA",
+        "DroporNo": "Drop",
+        "Dates": "2019-06-25 - 2019-06-25",
+        "DaysofWeek": "Saturday, Tuesday, Thursday",
+        "StartTime": "fgsfd",
+        "Field ize": "sfgs",
+        "Organizer": "fgsfsdf",
+        "ContactInfo": "ssfgs",
+        "Info": "fgsdfg"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.667, 45.5398]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1,
+      "properties": {
+        "RideName": "farting it uop",
+        "Distance": "asd.mfn,a",
+        "RideType": "Critty",
+        "StartSpot": "Adidas Employee Store, 2701 NW Vaughn St #209, Portland, OR 97210, USA",
+        "DroporNo": "Drop",
+        "Dates": "2019-06-25 - 2019-06-25",
+        "DaysofWeek": "Thursday, Saturday, Wednesday",
+        "StartTime": {},
+        "Field ize": "asdg",
+        "Organizer": {},
+        "ContactInfo": {},
+        "Info": {}
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.708, 45.5376]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1,
+      "properties": {
+        "RideName": "knifgiubnkjng",
+        "Distance": "s.dkfjgmnaf",
+        "RideType": "Critty",
+        "StartSpot": "Fart, Fart, Uttarakhand 249175, India",
+        "DroporNo": "Drop",
+        "Dates": "2019-06-25 - 2019-06-25",
+        "DaysofWeek": "Tuesday, Thursday, Friday, Saturday, Sunday",
+        "StartTime": {},
+        "Field ize": "sdfgsdfsdfgs",
+        "Organizer": {},
+        "ContactInfo": {},
+        "Info": "sfgs"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [78.2974, 30.2218]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": 1,
+      "properties": {
+        "RideName": "fart town",
+        "Distance": "aa,sjdkngf",
+        "RideType": "Critty",
+        "StartSpot": "Cornell Farm, 8212 SW Barnes Rd, Portland, OR 97225, USA",
+        "DroporNo": "Drop",
+        "Dates": "2019-06-25 - 2019-06-25",
+        "DaysofWeek": "Tuesday, Wednesday, Thursday, Friday, Saturday, Monday, Sunday",
+        "StartTime": "asfv",
+        "Field ize": "asdf",
+        "Organizer": "adf",
+        "ContactInfo": "adf",
+        "Info": "adsfa"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [-122.7602, 45.5107]
+      }
+    }
+  ]
+} 
